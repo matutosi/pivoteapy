@@ -6,7 +6,7 @@ setup(
     description="Create Pivot Table Easily",
     author='Toshikazu Matsumura',
     packages=find_packages(),
-    license='MIT'
+    license='MIT',
     install_requires=["pandas"],
     entry_points={
         "console_scripts": [
