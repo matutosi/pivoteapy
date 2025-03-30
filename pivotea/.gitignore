@@ -4,3 +4,5 @@ generate_test_data.py
 pivotea.spec
 pyvenv.cfg
 compare_result.py
+pivot_desktop.spec
+main.py

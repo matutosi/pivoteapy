@@ -4,15 +4,15 @@ def _prepare_data(df, row, col, value, split, sep="_"):
     combining multiple columns if necessary, and handling split columns.
 
     Parameters:
-    df (pd.DataFrame): The input DataFrame.
-    row (list): List of row labels.
-    col (list): List of column labels.
-    value (list): List of value labels.
-    split (list): List of columns to split by.
-    sep (str): Separator used to join multiple columns.
+        df (pd.DataFrame): The input DataFrame.
+        row (list): List of row labels.
+        col (list): List of column labels.
+        value (list): List of value labels.
+        split (list): List of columns to split by.
+        sep (str): Separator used to join multiple columns.
 
     Returns:
-    tuple: A tuple containing the modified DataFrame, new column name, new value name, and new split name (if any).
+        tuple: A tuple containing the modified DataFrame, new column name, new value name, and new split name (if any).
     """
     cat_cols = df.select_dtypes(include='category').columns
     for col in cat_cols:
@@ -50,15 +50,15 @@ def _pivot_data(df, row, combined_col, combined_value, combined_split, sep="_"):
     Pivots the DataFrame based on the provided row, column, value, and split parameters.
 
     Parameters:
-    df (pd.DataFrame): The input DataFrame.
-    row (list): List of row labels.
-    combined_col (str): The new column name created during data preparation.
-    combined_value (str): The new value name created during data preparation.
-    combined_split (str): The new split name created during data preparation (if any).
-    sep (str): Separator used to join multiple columns.
+        df (pd.DataFrame): The input DataFrame.
+        row (list): List of row labels.
+        combined_col (str): The new column name created during data preparation.
+        combined_value (str): The new value name created during data preparation.
+        combined_split (str): The new split name created during data preparation (if any).
+        sep (str): Separator used to join multiple columns.
 
     Returns:
-    pd.DataFrame or dict: The pivoted DataFrame or a dictionary of DataFrames if split is provided.
+        pd.DataFrame or dict: The pivoted DataFrame or a dictionary of DataFrames if split is provided.
     """
     tmp_col = "tmp_col"
     if combined_split:
@@ -90,13 +90,13 @@ def _add_group_sub(df, group, sep="_", tmp_col="tmp_col"):
     Adds a temporary column to the DataFrame for grouping purposes.
 
     Parameters:
-    df (pd.DataFrame): The input DataFrame.
-    group (list or str): The column(s) to group by.
-    sep (str): Separator used to join multiple columns.
-    tmp_col (str): The name of the temporary column to be added.
+        df (pd.DataFrame): The input DataFrame.
+        group (list or str): The column(s) to group by.
+        sep (str): Separator used to join multiple columns.
+        tmp_col (str): The name of the temporary column to be added.
 
     Returns:
-    pd.DataFrame: The modified DataFrame with the temporary column added.
+        pd.DataFrame: The modified DataFrame with the temporary column added.
     """
     if isinstance(group, str):
         group = [group]
@@ -124,16 +124,26 @@ def pivot(df, row, col, value, split=None, sep="_", rm_empty_df=True):
     Pivots the DataFrame based on the provided row, column, value, and split parameters.
 
     Parameters:
-    df (pd.DataFrame): The input DataFrame.
-    row (list): List of row labels.
-    col (list): List of column labels.
-    value (list): List of value labels.
-    split (list, optional): List of columns to split by. Defaults to None.
-    sep (str, optional): Separator used to join multiple columns. Defaults to "_".
-    rm_empty_df (bool, optional): Flag to remove empty DataFrames from the result. Defaults to True.
+        df (pd.DataFrame): The input DataFrame.
+        row (list): List of row labels.
+        col (list): List of column labels.
+        value (list): List of value labels.
+        split (list, optional): List of columns to split by. Defaults to None.
+        sep (str, optional): Separator used to join multiple columns. Defaults to "_".
+        rm_empty_df (bool, optional): Flag to remove empty DataFrames from the result. Defaults to True.
 
     Returns:
-    pd.DataFrame or dict: The pivoted DataFrame or a dictionary of DataFrames if split is provided.
+        pd.DataFrame or dict: The pivoted DataFrame or a dictionary of DataFrames if split is provided.
+
+    Example:
+        df = pd.DataFrame({
+            'A': ['a', 'b', 'c', 'd'],
+            'B': ['w', 'x', 'y', 'z'],
+            'C': [1, 2, 3, 4],
+            'D': [5, 6, 7, 8]
+        })
+        result = pivot(df, row=['A'], col=['B'], value=['C', 'D'], split=['D'])
+        print(result)
     """
     if split is None:
         split = []
