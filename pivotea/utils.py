@@ -1,5 +1,6 @@
 import os
 import pandas as pd
+import time
 
 def df_to_setting(df):
     """
@@ -34,6 +35,13 @@ def create_setting_xlsx(item, xlsx_input, start_file = True):
     Returns:
         str: The path to the generated settings Excel file.
     """
+    path_setting = xlsx_input.replace(".xlsx", "_") + 'setting.xlsx'
+    if os.path.exists(path_setting):
+        if start_file:
+            os.startfile(path_setting)
+            while not is_excel_open(path_setting):
+                time.sleep(0.1)
+        return path_setting
     pos = ["sheet", "row", "col", "cell"]
     item = list(item)
     null = [""] * 5
@@ -41,11 +49,12 @@ def create_setting_xlsx(item, xlsx_input, start_file = True):
     item = null + item + [""] * (max_len - len(item))
     pos  = null + pos + [""] * (max_len - len(pos))
     df_setting = pd.DataFrame({'pos': pos, 'item': item})
-    path_setting = xlsx_input.replace(".xlsx", "_") + 'setting.xlsx'
     if not os.path.exists(path_setting):
         df_setting.to_excel(path_setting, index=False)
     if start_file:
         os.startfile(path_setting) 
+        while not is_excel_open(path_setting):
+            time.sleep(0.1)
     return path_setting
 
 def create_output_xlsx(pivoted, xlsx_input, start_file = True):
