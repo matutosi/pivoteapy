@@ -7,4 +7,14 @@ setup(
     author='Toshikazu Matsumura',
     packages=find_packages(),
     license='MIT'
+    install_requires=["pandas"],
+    entry_points={
+        "console_scripts": [
+            "pivot = pivoteapy.pivot:pivot"
+        ],
+        "gui_scripts": [
+            "pivot = pivoteapy.pivot:pivot"
+        ]
+    }
 )
+
