@@ -6,3 +6,5 @@ pyvenv.cfg
 compare_result.py
 pivot_desktop.spec
 main.py
+timetable_pivoted.xlsx
+pivot_desctop.spec
